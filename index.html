@@ -12,20 +12,25 @@
     --bg:#f4f6f8;
     --dark:#1f2937;
 }
-
 /* =========================
-   FADE SCROLL ANIMATION
+   BATASI LEBAR KONTEN
 ========================= */
-.fade-scroll {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.9s ease;
+.content {
+    max-width: 900px;
+    margin: auto;
 }
 
-.fade-scroll.active {
-    opacity: 1;
-    transform: translateY(0);
+
+.fade-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
 }
+.fade-scroll.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* =========================
    BUBBLE BACKGROUND
@@ -523,17 +528,17 @@ Setelah itu, peserta didik melakukan penyesuaian elemen desain, mulai dari penga
 </footer>
 
 <script>
-/* FADE ON SCROLL */
 function fadeOnScroll() {
-    document.querySelectorAll(".fade-scroll").forEach(el => {
-        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-            el.classList.add("active");
-        }
-    });
+  document.querySelectorAll(".fade-scroll").forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+      el.classList.add("active");
+    }
+  });
 }
-
 window.addEventListener("scroll", fadeOnScroll);
-window.addEventListener("load", fadeOnScroll);
+fadeOnScroll();
+</script>
+<script>
 
 /* BUBBLE GENERATOR */
 const bubbleContainer = document.getElementById("bubbleContainer");
@@ -614,4 +619,3 @@ function submitQuiz() {
 
 </body>
 </html>
-

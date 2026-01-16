@@ -1,335 +1,617 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pembelajaran Desain Grafis dengan Canva</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #FFFFFF; /* Putih */
-            color: #333;
-            line-height: 1.6;
-        }
-        header {
-            background: linear-gradient(135deg, #007BFF, #0056b3); /* Gradien biru */
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        header .logo {
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-        header .logo svg {
-            width: 50px;
-            height: 50px;
-        }
-        nav {
-            background-color: #007BFF; /* Biru */
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        nav a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 16px 20px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-        nav a:hover {
-            background-color: #0056b3; /* Biru gelap */
-        }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #FFFFFF; /* Putih */
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .section {
-            display: none;
-            margin-bottom: 20px;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .active {
-            display: block;
-        }
-        .card {
-            background: #F8F9FA; /* Abu-abu terang untuk kartu */
-            border: 1px solid #E9ECEF;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 10px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        .card h3 {
-            color: #007BFF; /* Biru */
-            margin-top: 0;
-        }
-        button {
-            background-color: #007BFF; /* Biru */
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3; /* Biru gelap */
-        }
-        .quiz {
-            margin-top: 20px;
-        }
-        .quiz input {
-            margin-right: 10px;
-        }
-        .feedback {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        .simulation {
-            border: 1px solid #007BFF; /* Biru */
-            padding: 15px;
-            margin: 10px 0;
-            background: #F0F8FF; /* Biru muda */
-            border-radius: 8px;
-        }
-        .step {
-            cursor: pointer;
-            padding: 12px;
-            margin: 5px 0;
-            background: #E3F2FD; /* Biru sangat muda */
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-        .step:hover {
-            background: #BBDEFB; /* Biru lebih gelap */
-        }
-        .video-container {
-            margin: 20px 0;
-        }
-        .video-iframe {
-            display: none;
-            width: 100%;
-            max-width: 560px;
-            height: 315px;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        footer {
-            background: linear-gradient(135deg, #007BFF, #0056b3); /* Gradien biru */
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-        footer a {
-            color: #BBDEFB; /* Biru muda */
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        footer a:hover {
-            color: white;
-        }
-        @media (max-width: 768px) {
-            nav a {
-                float: none;
-                display: block;
-                text-align: left;
-            }
-            .container {
-                padding: 10px;
-            }
-            .video-iframe {
-                height: 250px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Desain Grafis Menggunakan Canva</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+    --primary:#6a11cb;
+    --secondary:#2575fc;
+    --bg:#f4f6f8;
+    --dark:#1f2937;
+}
+
+/* =========================
+   FADE SCROLL ANIMATION
+========================= */
+.fade-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.9s ease;
+}
+
+.fade-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================
+   BUBBLE BACKGROUND
+========================= */
+.bubble-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -100px;
+    width: 40px;
+    height: 40px;
+    background: rgba(106, 17, 203, 0.15);
+    border-radius: 50%;
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+    from {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(-120vh) scale(1.2);
+        opacity: 1;
+    }
+}
+
+
+.hero p{
+    text-align: center;
+}
+
+*{
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+p {
+  text-align: justify;
+  text-indent: 0em;
+  margin-bottom: 1.4em;
+}
+
+/* NAVBAR */
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:linear-gradient(90deg,var(--primary),var(--secondary));
+    padding:12px 0;
+    z-index:1000;
+}
+
+nav ul{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s;
+}
+
+nav a:hover{
+    opacity:0.8;
+}
+
+/* SECTION */
+section{
+    padding:100px 10% 80px;
+    animation:fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.hero{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:white;
+    text-align:center;
+    padding-top:140px;
+}
+
+.hero h1{
+    font-size:2.6em;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    font-size:1.1em;
+}
+
+img{
+    width:100%;
+    border-radius:12px;
+    margin:20px 0;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.content{
+    background:white;
+    border-radius:16px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+iframe{
+    width:100%;
+    height:400px;
+    border-radius:12px;
+    border:none;
+    margin:20px 0;
+}
+
+/* QUIZ */
+.quiz{
+    margin-top:20px;
+}
+
+.quiz button{
+    display:block;
+    width:100%;
+    margin:10px 0;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#e5e7eb;
+    cursor:pointer;
+    font-size:1em;
+    transition:0.3s;
+}
+
+/* =========================
+   QUIZ CASING (RAPI & MODERN)
+========================= */
+
+.quiz-box {
+    margin-top: 30px;
+}
+
+.quiz-item {
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.quiz-item:last-child {
+    border-bottom: none;
+}
+
+.quiz-item p {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Bungkus setiap opsi */
+.quiz-item label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8f9ff;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.25s;
+    border: 2px solid transparent;
+}
+
+/* Hover */
+.quiz-item label:hover {
+    background: #ecebff;
+}
+
+/* Radio */
+.quiz-item input[type="radio"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* Saat dipilih */
+.quiz-item input[type="radio"]:checked + span {
+    font-weight: 600;
+    color: #7b61ff;
+}
+
+/* Efek aktif */
+.quiz-item label:has(input[type="radio"]:checked) {
+    background: #e6e4ff;
+    border-color: #7b61ff;
+}
+
+/* =========================
+   TOMBOL SELESAI & HITUNG NILAI
+========================= */
+.btn-submit-quiz {
+    width: 100%;
+    margin-top: 30px;
+    padding: 15px 20px;
+    font-size: 17px;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: #ffffff;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover */
+.btn-submit-quiz:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(39, 174, 96, 0.35);
+}
+
+/* Aktif (saat diklik) */
+.btn-submit-quiz:active {
+    transform: scale(0.97);
+}
+
+/* Disabled (setelah submit) */
+.btn-submit-quiz:disabled {
+    background: #bdbdbd;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* FOOTER */
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+</style>
 </head>
+
 <body>
-    <header>
-        <div class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5V9l-10 5-10-5v8z"/>
-            </svg>
-        </div>
-        <h1>Pembelajaran Interaktif: Desain Grafis dengan Canva</h1>
-        <p>Mulai dari nol hingga mahir menggunakan Canva untuk desain grafis kreatif.</p>
-    </header>
-    <nav>
-        <a href="#" onclick="showSection('intro')">Beranda</a>
-        <a href="#" onclick="showSection('basic')">Tutorial Dasar</a>
-        <a href="#" onclick="showSection('advanced')">Tutorial Lanjutan</a>
-        <a href="#" onclick="showSection('quiz')">Quiz</a>
-        <a href="#" onclick="showSection('simulation')">Simulasi Canva</a>
-        <a href="#" onclick="showSection('videos')">Video Tutorial</a>
-    </nav>
-    <div class="container">
-        <div id="intro" class="section active">
-            <div class="card">
-                <h2>Selamat Datang!</h2>
-                <p>Website ini akan membimbing Anda belajar desain grafis menggunakan Canva. Canva adalah alat online gratis yang mudah digunakan untuk membuat poster, infografis, dan lainnya. Klik menu di atas untuk mulai.</p>
-                <p><strong>Apa yang akan Anda pelajari:</strong></p>
-                <ul>
-                    <li>Dasar-dasar antarmuka Canva.</li>
-                    <li>Menambahkan elemen dan teks.</li>
-                    <li>Tips desain lanjutan.</li>
-                    <li>Quiz untuk menguji pengetahuan.</li>
-                    <li>Simulasi langkah-langkah praktis.</li>
-                    <li>Video tutorial interaktif dari YouTube.</li>
-                </ul>
-                <img src="https://via.placeholder.com/600x300/007BFF/FFFFFF?text=Canva+Interface" alt="Canva Interface" style="width:100%; border-radius:8px;">
-            </div>
-        </div>
-        <div id="basic" class="section">
-            <div class="card">
-                <h3>Tutorial Dasar Canva</h3>
-                <p>Ikuti langkah-langkah ini untuk memulai:</p>
-                <ol>
-                    <li>Buka <a href="https://www.canva.com" target="_blank">canva.com</a> dan buat akun gratis.</li>
-                    <li>Pilih template (misalnya, "Poster") dari galeri.</li>
-                    <li>Tambahkan teks dengan mengklik ikon "T" dan ketik pesan Anda.</li>
-                    <li>Tambahkan gambar dari tab "Elements" atau upload milik Anda.</li>
-                    <li>Edit warna dan ukuran elemen dengan panel sisi.</li>
-                    <li>Unduh hasilnya sebagai PNG atau PDF.</li>
-                </ol>
-                <button onclick="toggleTutorial('basic')">Sembunyikan/Tampilkan Detail</button>
-                <div id="basic-detail" style="display: none;">
-                    <p><strong>Tips:</strong> Gunakan grid untuk alignment yang rapi. Coba berbagai font untuk suasana berbeda.</p>
-                </div>
-            </div>
-        </div>
-        <div id="advanced" class="section">
-            <div class="card">
-                <h3>Tutorial Lanjutan</h3>
-                <p>Tingkatkan desain Anda:</p>
-                <ul>
-                    <li>Gunakan "Magic Design" untuk saran otomatis.</li>
-                    <li>Buat animasi dengan "Animate" tab.</li>
-                    <li>Integrasikan dengan brand kit untuk konsistensi.</li>
-                    <li>Ekspor untuk berbagai platform (Instagram, Facebook).</li>
-                </ul>
-                <button onclick="toggleTutorial('advanced')">Sembunyikan/Tampilkan Detail</button>
-                <div id="advanced-detail" style="display: none;">
-                    <p><strong>Contoh:</strong> Untuk poster event, gunakan warna kontras dan hierarki teks (judul besar, deskripsi kecil).</p>
-                </div>
-            </div>
-        </div>
-        <div id="quiz" class="section">
-            <div class="card">
-                <h3>Quiz Interaktif</h3>
-                <div class="quiz">
-                    <p>1. Apa yang pertama kali Anda lakukan di Canva?</p>
-                    <input type="radio" name="q1" value="a"> Buat akun<br>
-                    <input type="radio" name="q1" value="b"> Pilih template<br>
-                    <input type="radio" name="q1" value="c"> Unduh gambar<br>
-                    <button onclick="checkAnswer(1, 'a')">Jawab</button>
-                    <div id="feedback1" class="feedback"></div>
-                </div>
-                <div class="quiz">
-                    <p>2. Di mana Anda menambahkan teks di Canva?</p>
-                    <input type="radio" name="q2" value="a"> Tab Elements<br>
-                    <input type="radio" name="q2" value="b"> Ikon "T"<br>
-                    <input type="radio" name="q2" value="c"> Panel Upload<br>
-                    <button onclick="checkAnswer(2, 'b')">Jawab</button>
-                    <div id="feedback2" class="feedback"></div>
-                </div>
-            </div>
-        </div>
-        <div id="simulation" class="section">
-            <div class="card">
-                <h3>Simulasi Langkah-Langkah Canva</h3>
-                <p>Klik langkah-langkah di bawah untuk simulasi virtual:</p>
-                <div class="simulation">
-                    <div class="step" onclick="simulateStep(1)">Langkah 1: Buka Canva dan pilih template</div>
-                    <div class="step" onclick="simulateStep(2)">Langkah 2: Tambahkan teks</div>
-                    <div class="step" onclick="simulateStep(3)">Langkah 3: Tambahkan gambar</div>
-                    <div class="step" onclick="simulateStep(4)">Langkah 4: Edit dan unduh</div>
-                </div>
-                <div id="sim-result"></div>
-            </div>
-        </div>
-        <div id="videos" class="section">
-            <div class="card">
-                <h3>Video Tutorial Interaktif</h3>
-                <p>Tonton video tutorial berikut untuk panduan visual. Klik tombol untuk membuka video.</p>
-                <div class="video-container">
-                    <h4>Video 1: Pengantar Canva</h4>
-                    <button onclick="toggleVideo('video1')">Tonton Video 1</button>
-                    <iframe id="video1" class="video-iframe" src="https://www.youtube.com/embed/jzWxBuvwuwQ" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <h4>Video 2: Tips Desain Grafis di Canva</h4>
-                    <button onclick="toggleVideo('video2')">Tonton Video 2</button>
-                    <iframe id="video2" class="video-iframe" src="https://www.youtube.com/embed/Llnmf5BXLBA" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer>
-        <p>&copy; 2023 Pembelajaran Canva. Dibuat untuk edukasi.</p>
-        <a href="https://www.canva.com" target="_blank">Kunjungi Canva</a> |
-        <a href="#" target="_blank">Facebook</a> |
-        <a href="#" target="_blank">Instagram</a>
-    </footer>
-    <script>
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => section.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-        }
+<div class="bubble-container" id="bubbleContainer"></div>
+<nav>
+<ul>
+    <li><a href="#pendahuluan">Pendahuluan</a></li>
+    <li><a href="#canva">Canva</a></li>
+    <li><a href="#fitur">Fitur</a></li>
+    <li><a href="#warna">Warna</a></li>
+    <li><a href="#praktik">Praktik</a></li>
+    <li><a href="#publikasi">Publikasi</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+</ul>
+</nav>
+<div class="nav-backdrop"></div>
+<section class="hero">
+    <h1>Desain Grafis Menggunakan Canva</h1>
+    <p>Media pembelajaran interaktif untuk memahami desain grafis secara modern dan mudah</p>
+</section>
 
-        function toggleTutorial(id) {
-            const detail = document.getElementById(id + '-detail');
-            detail.style.display = detail.style.display === 'none' ? 'block' : 'none';
-        }
+<section id="pendahuluan" class="fade-scroll">
+<div class="content">
+<h2>Pendahuluan</h2>
+<img src="https://course-net.com/wp-content/uploads/2023/03/fb_cover-1.webp" alt="Desain Grafis">
+<p>
+Desain grafis merupakan salah satu bentuk komunikasi visual yang memanfaatkan kombinasi teks, gambar, warna, dan tata letak untuk menyampaikan pesan secara efektif. Dalam dunia pendidikan, desain grafis tidak hanya berfungsi sebagai sarana estetika, tetapi juga sebagai alat bantu penyampaian informasi agar lebih mudah dipahami, menarik, dan komunikatif. Seiring dengan berkembangnya teknologi digital, proses desain grafis kini tidak lagi terbatas pada software profesional yang rumit, melainkan dapat dilakukan dengan aplikasi berbasis web yang lebih sederhana dan mudah diakses.
+<img src="https://content.api.news/v3/images/bin/d47ba3ac4cbbc61e72e841c21fd00218" alt="Canva Interface">
 
-        function checkAnswer(question, correct) {
-            const selected = document.querySelector(`input[name=q${question}]:checked`);
-            const feedback = document.getElementById(`feedback${question}`);
-            if (selected && selected.value === correct) {
-                feedback.textContent = 'Benar! 🎉';
-                feedback.style.color = '#28a745'; /* Hijau untuk benar */
-            } else {
-                feedback.textContent = 'Salah, coba lagi.';
-                feedback.style.color = '#dc3545'; /* Merah untuk salah */
+Salah satu software yang banyak digunakan saat ini adalah Canva. Canva hadir sebagai solusi desain grafis yang memungkinkan siapa saja, termasuk pemula, untuk menghasilkan karya visual yang menarik tanpa harus memiliki kemampuan desain tingkat lanjut. Oleh karena itu, pembelajaran desain grafis menggunakan Canva menjadi relevan untuk mendukung kompetensi digital peserta didik di era transformasi teknologi.
+</p>
+
+</div>
+</section>
+
+<section id="canva" class="fade-scroll">
+<div class="content">
+<h2>Apa Itu Canva?</h2>
+<img src="https://image.idntimes.com/post/20250514/swello-ed1e6rqyeag-unsplash-c93f7108e62407ff3e6ea73d1d868881-9d16f4c158053bbc56cf9f04db1f3300.jpg">
+<p>
+Canva merupakan software desain grafis berbasis cloud yang dapat diakses melalui browser maupun aplikasi mobile. Keunggulan utama Canva terletak pada antarmuka pengguna yang sederhana dan intuitif, sehingga pengguna dapat memahami cara penggunaannya dalam waktu singkat. Canva menyediakan ribuan template desain siap pakai yang dapat dimodifikasi sesuai kebutuhan, mulai dari desain poster, presentasi, infografis, hingga konten media sosial.
+</p>
+<p>
+Dalam penggunaannya, Canva menyediakan beberapa jenis akun, yaitu akun gratis, akun Pro, dan akun edukasi. Akun gratis sudah cukup untuk memenuhi kebutuhan dasar pembelajaran desain grafis, sedangkan akun Pro dan edukasi menyediakan fitur tambahan seperti elemen premium, penghapus latar belakang, dan ruang penyimpanan yang lebih besar. Hal ini menjadikan Canva fleksibel untuk digunakan baik dalam pembelajaran formal maupun nonformal.
+</p>
+</div>
+</section>
+
+<section id="fitur" class="fade-scroll">
+<div class="content">
+<h2>Fitur Canva dalam Desain</h2>
+<img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546" alt="Fitur Canva">
+<p>
+Canva menyediakan berbagai fitur yang mendukung proses desain grafis secara menyeluruh. Fitur template memungkinkan pengguna memulai desain tanpa harus membuat layout dari awal. Template tersebut dapat disesuaikan dengan mengganti teks, warna, dan gambar sesuai kebutuhan. Fitur teks di Canva menyediakan berbagai jenis font yang dapat dikombinasikan untuk menciptakan hierarki visual yang jelas antara judul, subjudul, dan isi.
+</p>
+<p>
+Selain itu, Canva juga menyediakan elemen visual seperti ikon, bentuk, ilustrasi, dan stiker yang dapat digunakan untuk memperkaya desain. Pengguna juga dapat mengunggah gambar sendiri dan melakukan pengolahan gambar sederhana seperti pemotongan, penyesuaian warna, dan penambahan filter. Dengan fitur-fitur tersebut, Canva memungkinkan proses desain yang efisien namun tetap menghasilkan karya yang profesional.
+</p>
+<p>
+Canva menyediakan ribuan template, berbagai jenis font, elemen grafis, serta fitur
+pengolahan gambar. Pengguna juga dapat mengunduh desain dalam berbagai format seperti
+PNG, JPG, dan PDF.
+</p>
+</div>
+</section>
+
+<section id="warna" class="fade-scroll">
+<div class="content">
+<h2>Warna dan Tipografi</h2>
+<p>
+Pemilihan warna dan tipografi merupakan aspek penting dalam desain grafis. Warna tidak hanya berfungsi sebagai elemen estetika, tetapi juga memiliki makna psikologis yang dapat memengaruhi persepsi audiens. Dalam Canva, pengguna dapat memilih palet warna yang sudah disediakan atau menyesuaikan warna secara manual agar sesuai dengan tema desain.
+<img src="https://www.clipstudio.net/wp-content/uploads/2020/01/0075_005_en-us.jpg" alt="Fitur Canva">
+Tipografi juga berperan besar dalam menentukan keterbacaan dan kesan visual desain. Penggunaan font sebaiknya dibatasi agar desain tidak terlihat berlebihan. Kombinasi font yang tepat antara judul dan isi akan membantu audiens memahami informasi dengan lebih mudah. Oleh karena itu, pembelajaran desain grafis perlu menekankan pentingnya konsistensi warna dan tipografi dalam setiap karya desain.
+</p>
+</div>
+</section>
+
+<section id="praktik" class="fade-scroll">
+<div class="content">
+<h2>Praktik Desain Grafis Menggunakan Canva</h2>
+<img src="https://mysocialboutique.co/wp-content/uploads/2022/01/canva-templates-how-to-use-on-social-media-1024x478.png" alt="Fitur Canva">
+<p>
+Dalam pembelajaran desain grafis, praktik merupakan bagian yang sangat penting. Peserta didik dapat diberikan tugas untuk membuat berbagai jenis desain seperti poster edukasi, konten media sosial, presentasi pembelajaran, atau infografis. Proses pembuatan desain dimulai dari menentukan tujuan dan sasaran audiens, kemudian memilih template yang sesuai.
+<img src="https://marketplace.canva.com/EAF0LejOZJ8/1/0/1131w/canva-brown-and-yellow-doodle-the-artistic-process-poster-0WLVUhxDMMA.jpg" alt="Fitur Canva">
+Setelah itu, peserta didik melakukan penyesuaian elemen desain, mulai dari pengaturan warna, pemilihan font, hingga penyusunan gambar dan teks. Tahap akhir adalah melakukan evaluasi dan revisi untuk memastikan desain telah sesuai dengan tujuan yang ditetapkan. Melalui praktik ini, peserta didik diharapkan mampu menerapkan konsep desain grafis secara nyata.
+</p>
+</div>
+</section>
+
+<section id="publikasi" class="fade-scroll">
+<div class="content">
+<h2>Ekspor, Publikasi, dan Etika Desain</h2>
+<img src="https://images.squarespace-cdn.com/content/v1/6065a34b05d2cd2c4dee4fbf/41269033-12eb-4cec-9d6b-0a99e086743d/Cloud+storage+options+you+can+connect+with+in+Canva.png" alt="Fitur Canva">
+<p>
+Canva menyediakan berbagai pilihan format ekspor yang dapat disesuaikan dengan kebutuhan, seperti PNG dan JPG untuk media sosial, PDF untuk keperluan cetak atau presentasi, serta format video untuk konten animasi. Kemudahan ini memudahkan peserta didik dalam mempublikasikan hasil desain ke berbagai platform.
+</p>
+<p>
+Setelah itu, peserta didik melakukan penyesuaian elemen desain, mulai dari pengaturan warna, pemilihan font, hingga penyusunan gambar dan teks. Tahap akhir adalah melakukan evaluasi dan revisi untuk memastikan desain telah sesuai dengan tujuan yang ditetapkan. Melalui praktik ini, peserta didik diharapkan mampu menerapkan konsep desain grafis secara nyata.
+</p>
+</div>
+</section>
+
+<section id="video" class="fade-scroll">
+<div class="content">
+<h2>Video Pembelajaran Canva</h2>
+
+<iframe src="https://www.youtube.com/embed/jzWxBuvwuwQ" allowfullscreen></iframe>
+
+<iframe src="https://www.youtube.com/embed/Llnmf5BXLBA" allowfullscreen></iframe>
+
+</div>
+</section>
+
+<section id="quiz" class="section" class="fade-scroll">
+    <h2 class="section-title reveal">Quiz Evaluasi</h2>
+
+    <div class="quiz-box reveal" id="quizForm">
+
+        <!-- SOAL 1 -->
+        <div class="quiz-item">
+            <p>1. Canva adalah?</p>
+            <label><input type="radio" name="q1"> Aplikasi editing video</label>
+            <label><input type="radio" name="q1"> Software desain grafis</label>
+            <label><input type="radio" name="q1"> Sistem operasi</label>
+            <label><input type="radio" name="q1"> Game online</label>
+        </div>
+
+        <!-- SOAL 2 -->
+        <div class="quiz-item">
+            <p>2. Canva berbasis?</p>
+            <label><input type="radio" name="q2"> Desktop offline</label>
+            <label><input type="radio" name="q2"> Web / online</label>
+            <label><input type="radio" name="q2"> Command line</label>
+            <label><input type="radio" name="q2"> Server lokal</label>
+        </div>
+
+        <!-- SOAL 3 -->
+        <div class="quiz-item">
+            <p>3. Fungsi utama Canva adalah?</p>
+            <label><input type="radio" name="q3"> Menulis kode</label>
+            <label><input type="radio" name="q3"> Membuat desain visual</label>
+            <label><input type="radio" name="q3"> Mengelola database</label>
+            <label><input type="radio" name="q3"> Mengedit audio</label>
+        </div>
+
+        <!-- SOAL 4 -->
+        <div class="quiz-item">
+            <p>4. Area utama untuk mendesain di Canva disebut?</p>
+            <label><input type="radio" name="q4"> Toolbar</label>
+            <label><input type="radio" name="q4"> Sidebar</label>
+            <label><input type="radio" name="q4"> Canvas</label>
+            <label><input type="radio" name="q4"> Footer</label>
+        </div>
+
+        <!-- SOAL 5 -->
+        <div class="quiz-item">
+            <p>5. Template di Canva berfungsi untuk?</p>
+            <label><input type="radio" name="q5"> Menghapus desain</label>
+            <label><input type="radio" name="q5"> Mempercepat pembuatan desain</label>
+            <label><input type="radio" name="q5"> Mengunci akun</label>
+            <label><input type="radio" name="q5"> Menyimpan password</label>
+        </div>
+
+        <!-- SOAL 6 -->
+        <div class="quiz-item">
+            <p>6. Canva cocok digunakan oleh?</p>
+            <label><input type="radio" name="q6"> Programmer saja</label>
+            <label><input type="radio" name="q6"> Desainer profesional saja</label>
+            <label><input type="radio" name="q6"> Semua kalangan</label>
+            <label><input type="radio" name="q6"> Teknisi jaringan</label>
+        </div>
+
+        <!-- SOAL 7 -->
+        <div class="quiz-item">
+            <p>7. Panel Elemen berisi?</p>
+            <label><input type="radio" name="q7"> Database</label>
+            <label><input type="radio" name="q7"> Bentuk, ikon, grafik</label>
+            <label><input type="radio" name="q7"> Kode HTML</label>
+            <label><input type="radio" name="q7"> File sistem</label>
+        </div>
+
+        <!-- SOAL 8 -->
+        <div class="quiz-item">
+            <p>8. Canva dapat diakses melalui?</p>
+            <label><input type="radio" name="q8"> BIOS</label>
+            <label><input type="radio" name="q8"> Browser internet</label>
+            <label><input type="radio" name="q8"> CMD</label>
+            <label><input type="radio" name="q8"> File explorer</label>
+        </div>
+
+        <!-- SOAL 9 -->
+        <div class="quiz-item">
+            <p>9. Fitur animasi Canva digunakan untuk?</p>
+            <label><input type="radio" name="q9"> Menghapus objek</label>
+            <label><input type="radio" name="q9"> Memberi efek gerak</label>
+            <label><input type="radio" name="q9"> Mengunci halaman</label>
+            <label><input type="radio" name="q9"> Menyimpan file</label>
+        </div>
+
+        <!-- SOAL 10 -->
+        <div class="quiz-item">
+            <p>10. Keunggulan Canva adalah?</p>
+            <label><input type="radio" name="q10"> Sulit digunakan</label>
+            <label><input type="radio" name="q10"> Banyak kode</label>
+            <label><input type="radio" name="q10"> Mudah dan interaktif</label>
+            <label><input type="radio" name="q10"> Berbasis teks</label>
+        </div>
+
+<button
+    type="button"
+    class="btn-submit-quiz"
+    id="submitQuizBtn"
+    onclick="submitQuiz()">
+    Selesai dan Hitung Nilai
+</button>
+
+
+<!-- HASIL NILAI -->
+<div id="quizResult" class="quiz-result" style="display:none;">
+    <h3>Hasil Evaluasi</h3>
+    <p id="quizScoreText"></p>
+</div>
+</section>
+
+
+<footer>
+<p>Gani Nugroho - Website Pembelajaran Desain Grafis Menggunakan Canva</p>
+</footer>
+
+<script>
+/* FADE ON SCROLL */
+function fadeOnScroll() {
+    document.querySelectorAll(".fade-scroll").forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+            el.classList.add("active");
+        }
+    });
+}
+
+window.addEventListener("scroll", fadeOnScroll);
+window.addEventListener("load", fadeOnScroll);
+
+/* BUBBLE GENERATOR */
+const bubbleContainer = document.getElementById("bubbleContainer");
+
+function createBubble() {
+    const bubble = document.createElement("span");
+    bubble.classList.add("bubble");
+
+    const size = Math.random() * 40 + 20;
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+    bubble.style.left = Math.random() * 100 + "%";
+    bubble.style.animationDuration = (Math.random() * 6 + 6) + "s";
+
+    bubbleContainer.appendChild(bubble);
+
+    setTimeout(() => {
+        bubble.remove();
+    }, 12000);
+}
+
+setInterval(createBubble, 800);
+</script>
+
+<script>
+function submitQuiz() {
+
+    const confirmSubmit = confirm(
+        "Apakah kamu yakin ingin mengakhiri quiz?\nJawaban tidak dapat diubah setelah ini."
+    );
+
+    if (!confirmSubmit) return;
+
+    const answers = {
+        q1: 1,
+        q2: 1,
+        q3: 1,
+        q4: 2,
+        q5: 1,
+        q6: 2,
+        q7: 1,
+        q8: 1,
+        q9: 1,
+        q10: 2
+    };
+
+    let score = 0;
+    let total = Object.keys(answers).length;
+
+    for (let q in answers) {
+        const options = document.getElementsByName(q);
+        options.forEach((opt, index) => {
+            if (opt.checked && index === answers[q]) {
+                score++;
             }
-        }
+            // kunci jawaban
+            opt.disabled = true;
+        });
+    }
 
-        function simulateStep(step) {
-            const result = document.getElementById('sim-result');
-            const messages = [
-                'Anda membuka Canva dan memilih template poster.',
-                'Anda menambahkan teks "Selamat Datang" di kanvas.',
-                'Anda menambahkan gambar dari galeri.',
-                'Anda mengedit warna dan mengunduh sebagai PNG.'
-            ];
-            result.textContent = messages[step - 1];
-        }
+    const nilai = Math.round((score / total) * 100);
 
-        function toggleVideo(videoId) {
-            const video = document.getElementById(videoId);
-            video.style.display = video.style.display === 'none' || video.style.display === '' ? 'block' : 'none';
-        }
-    </script>
+    // tampilkan hasil
+    const resultBox = document.getElementById("quizResult");
+    const scoreText = document.getElementById("quizScoreText");
+
+    scoreText.innerHTML =
+        "Jawaban benar: <b>" + score + "</b> dari <b>" + total + "</b><br>" +
+        "Nilai akhir: <b>" + nilai + "</b>";
+
+    resultBox.style.display = "block";
+
+    // kunci tombol
+    document.getElementById("submitQuizBtn").disabled = true;
+}
+</script>
+
+
 </body>
 </html>
+
